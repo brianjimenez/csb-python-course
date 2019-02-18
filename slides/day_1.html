@@ -1,0 +1,285 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>CSB Python Course - Day 1</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				
+				<section>
+					<h1>Python Course</h1>
+					<h3>Computational Structural Biology Group<br><a href="http://www.bonvinlab.org/">BonvinLab</a></h3>
+					<p>
+						<small><a href="https://github.com/brianjimenez" target="_blank">Brian Jimenez</a></small>
+					</p>
+				</section>
+				
+				<section>
+					<h2>Day 1</h2>
+                    <ol>
+                        <li><a href="#/introduction">Introduction</a></li>
+                        <li><a href="#/ecosystem">The ecosystem</a></li>
+                        <li>Python syntax and native data-types</li>
+                        <li>Code organization</li>
+                        <li>Parsing atom data</li>
+                    </ol>
+                </section>
+
+                <!-- Introduction Section -->
+                <section id="introduction">
+					<section data-background="#4d7e65">
+						<h2>1. Introduction</h2>
+					</section>
+
+					<section>
+						<h2>What is Python?</h2>
+						<p>Python is an interpreted, interactive, object-oriented programming language and it is portable and extensible in C or C++</p>
+					</section>
+
+					<section>
+						<h2>"History"</h2>
+						<p>Development started by Guido van Rossum (ex-BDFL, <em>Benevolent Dictator for Life</em>) during the 1989 Christimas holiday.<br>February 1991: first public version posted to USENET.</p>
+                    </section>
+                    <section>
+						<h2>"History"</h2>
+                        <p>Monty Python's <em>Flying Circus</em> and the name of the language is not just a coincidence.</p>
+                    </section>
+                    <section>
+                    	<h2>What is a PEP?</h2>
+                        <p>PEP is a <em>Python Enhancement Proposal</em></p>
+                        <a href="https://www.python.org/dev/peps/">PEP-0: Index of Python Enhancement Proposals</a>
+                    </section>
+                    <section>
+						<h2>"History"</h2>
+                        <ul>
+                           <li>Python 2.0 released on 16 October 2000</li>
+                           <li>Python 3.0 on 3 December 2008.</li>
+                           <li>Python 2.7 End of Life in 2020 (<a href="https://legacy.python.org/dev/peps/pep-0373/">PEP-373</a>).</li>
+                           <li>Python 3.8.0 candidate 1: Sunday, 2019-09-29 (<a href="https://www.python.org/dev/peps/pep-0569/">PEP-569</a>).</li>
+                        </ul>
+					</section>
+                    <section>
+                        <h2>The Zen of Python (<a href="http://legacy.python.org/dev/peps/pep-0020/" target="_blank">PEP20</a>)</h2>
+                        <ul>
+                            <li>Beautiful is better than ugly.</li>
+                            <li>Explicit is better than implicit.</li>
+                            <li>Simple is better than complex.</li>
+                            <li>...</li>
+                            <li>Readability counts</li>
+                        </ul>
+                        <p>Try this:</p>
+                        <pre><code data-trim contenteditable>
+$ python3
+>>> import this
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Being <b>pythonic</b> is about idioms, not religion</h2>
+                        <p><b>Idioms:</b> What you know from other programming languages may not be always useful, natural or appropiate in Python.</p>
+                    </section>
+
+                    <section>
+	                    <p>C syntax:</p>
+	                    <pre><code class="Cpp" data-trim contenteditable>
+for (i=0; i < mylist_length; i++) {
+   do_something(mylist[i]);
+}
+                    	</code></pre>
+                    	<br>
+                    	<p>Pythonic way:</p>
+                    	<pre><code data-trim contenteditable>
+for element in mylist:
+   do_something(element)
+						</code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Why Python?</h2>
+                        <ul>
+                            <li>Cross-platform</li>
+                            <li>Mature and big community (#2 most used)</li>
+                            <li>Memory secure</li>
+                            <li>Rapid prototyping</li>
+                            <li>Syntax is close to natural language</li>
+                    </section>
+
+				</section>
+
+				<!-- Ecosystem Section -->
+				<section id="ecosystem">
+                    <section data-background="#8C4738">
+					    <h2>2. The ecosystem</h2>
+                    </section>
+
+                    <section>
+                        <h2>The standard library</h2>
+                        <p>Small core, large standard library <em>"batteries included"</em>.</p>
+                        <ul>
+                            <li><b>string</b>: Common string operations</li>
+                            <li><b>datetime</b>: Basic date and time types</li>
+                            <li><b>math, cmath, decimal, fractions</b>: Mathematical functions</li>
+                            <li><b>os.path, glob, shutil</b>: File-system operations</li>
+                            <li><b>os</b>: Operating system interfaces</li>
+                            <li><b>sys, subprocess, email, json, urllib2...</b></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Python Package Index</h2>
+                        <p><a href="https://pypi.python.org/pypi" target="_blank">PyPI</a> is the official Python repository for third-party software. It is the correct place to share your python packages with other python users. Same as CPAN in Perl community.</p>
+                        <p>It is maintained by the Python Software Foundation and referenced by the <em>pip</em> command.</p>
+                    </section>
+                    <section>
+                        <h2>Important scientific libraries</h2>
+                        <p>
+                            <ul>
+                                <li><a href="http://www.numpy.org/" target="_blank">NumPy</a></li>
+                                <li><a href="http://www.scipy.org/" target="_blank">SciPy</a></li>
+                                <li><a href="https://bokeh.pydata.org/en/latest/" target="_blank">Bokeh</a></li>
+                                <li><a href="http://www.biopython.org/" target="_blank">BioPython</a></li>
+                            </ul>
+                            <br><br>
+                            Visit the python wiki for a more comprehensive list: <a href="https://wiki.python.org/moin/NumericAndScientific" target="_blank">Numeric and Scientific</a>.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>Scientific software</h2>
+                        <p>
+                            <ul>
+                                <li><a href="http://pychem.sf.net" target="_blank">PyChem</a></li>
+                                <li><a href="http://www.cgl.ucsf.edu/chimera" target="_blank">UCSF Chimera</a></li>
+                                <li><a href="http://www.salilab.org/modeller" target="_blank">Modeller</a></li>
+                                <li><a href="http://www.pymol.org/" target="_blank">PyMol</a></li>
+                                <li><a href="https://github.com/haddocking/pdb-tools" target="_blank">PDB-Tools</a></li>
+                                <li><a href="https://nestor.science.uu.nl/haddock2.4/" target="_blank">HADDOCK 2.4</li>
+                                <li><a href="http://ipython.org" target="_blank">IPython</a>: a command shell for Python with browser-based capabilities.</li>
+                            </ul>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>Python implementations</h2>
+                        <p>CPython is the reference implementation, but not the only one:</p>
+                        <ul>
+                            <li><a href="http://pypy.org" target="_blank">PyPy</a>: versions 2.7.13 and 3.5.3, 3.6. JIT compiler, stackless (threads, no <a href="https://wiki.python.org/moin/GlobalInterpreterLock" target="_blank">GIL</a>)</li>
+                            <li><a href="http://www.jython.org" target="_blank">Jython</a>: Python to Java bytecode</li>
+                            <li><a href="http://www.ironpython.net" target="_blank">IronPython</a>: .NET framework</li>
+                            <li><a href="http://www.stackless.com" target="_blank">StacklessPython</a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Installing modules</h2>
+                        <p>Ubuntu</p>
+                        <pre><code class="bash" data-trim contenteditable>
+sudo apt-get install python3-numpy
+						</code></pre>
+						<p>macOS / Macports</p>
+						<pre><code class="bash" data-trim contenteditable>
+sudo port install py37-numpy
+						</code></pre>
+                        <br>
+                        <p>*Note this is a system-wide installation. Bad idea? Maybe.</p>
+                    </section>
+
+                    <section>
+                        <h2>Python Distribution Utilities (Distutils)</h2>
+                        <p>You download a python packaged file (<a href="http://peak.telecommunity.com/DevCenter/PythonEggs" target="_blank">python egg</a>) which contains a <em>README.txt</em> and a <em>setup.py</em> files:</p>
+                        <pre><code class="bash" data-trim contenteditable>
+$ python3.7 setup.py build
+$ python3.7 setup.py install
+</code></pre>
+                        <br>
+                        <p>Highly recommended: specify an installation directory via prefix:</p>
+<pre><code class="bash" data-trim contenteditable>
+python setup.py install --prefix=/home/brian/python
+</code></pre>
+                    </section>
+
+                    <section>
+                        <h2>pip vs easy_install</h2>
+                        <p><em>easy_install</em> was released in 2004, downloads and installs automatically packages (and dependencies) from PyPI. But <em>easy_install</em> does not support the Wheel binary package format while pip does.<br>Furthermore, <em>pip</em> (released in 2008) supports uninstalling packages. <b>You should definetely use pip</b>.</p>
+<pre><code class="bash" data-trim contenteditable>
+$ pip-3.7 search bio
+biotools                - A bunch of bioinformatics utilities.
+moa                     - Moa - command-line workflows (in bioinformatics)
+...
+</code></pre>
+                    </section>
+
+                    <section>
+                        <h2>virtualenv</h2>
+                        <p>A tool to create isolated Python environments</p>
+                        <p>It elegantly solves the problem of installing two version of the same python extension in order to use them at the same time.</p>
+<pre><code class="bash" data-trim contenteditable>
+$ virtualenv ENV
+Using base prefix '/opt/local/Library/Frameworks/Python.framework/Versions/3.7'
+New python executable in ./ENV/bin/python3.7
+Also creating executable in ./ENV/bin/python
+Installing setuptools, pip, wheel...
+done.
+$ cd ENV
+$ ls
+bin     include lib
+$ source bin/activate
+(ENV) $
+</code></pre>
+                    </section>
+                    <section>
+                        <h2>virtualenv (II)</h2>
+<p>Deactivate the virtualenv:</p>
+<pre><code class="python" data-trim contenteditable>
+(ENV) $ deactivate
+</code></pre>
+                    </section>
+</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                slideNumber: true, 
+                slideNumber: 'c/t',
+                showSlideNumber: 'all',
+                transition: 'slide',
+
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
