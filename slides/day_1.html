@@ -38,16 +38,15 @@
                     <ol>
                         <li><a href="#/introduction">Introduction</a></li>
                         <li><a href="#/ecosystem">The ecosystem</a></li>
-                        <li>Python syntax and native data-types</li>
-                        <li>Code organization</li>
-                        <li>Parsing atom data</li>
+                        <li><a href="#/syntax">Python syntax and native data-types</a></li>
+                        <li><a href="#/parsing">Parsing atom data</a></li>
                     </ol>
                 </section>
 
                 <!-- Introduction Section -->
                 <section id="introduction">
-					<section data-background="#4d7e65">
-						<h2>1. Introduction</h2>
+					<section data-background="#68A0D7">
+						<h2 style="color:white;">1. Introduction</h2>
 					</section>
 
 					<section>
@@ -205,32 +204,32 @@ sudo port install py37-numpy
                         <h2>Python Distribution Utilities (Distutils)</h2>
                         <p>You download a python packaged file (<a href="http://peak.telecommunity.com/DevCenter/PythonEggs" target="_blank">python egg</a>) which contains a <em>README.txt</em> and a <em>setup.py</em> files:</p>
                         <pre><code class="bash" data-trim contenteditable>
-$ python3.7 setup.py build
-$ python3.7 setup.py install
-</code></pre>
+$ python3 setup.py build
+$ python3 setup.py install
+						</code></pre>
                         <br>
                         <p>Highly recommended: specify an installation directory via prefix:</p>
-<pre><code class="bash" data-trim contenteditable>
-python setup.py install --prefix=/home/brian/python
-</code></pre>
+						<pre><code class="bash" data-trim contenteditable>
+python3 setup.py install --prefix=/home/brian/python
+						</code></pre>
                     </section>
 
                     <section>
                         <h2>pip vs easy_install</h2>
                         <p><em>easy_install</em> was released in 2004, downloads and installs automatically packages (and dependencies) from PyPI. But <em>easy_install</em> does not support the Wheel binary package format while pip does.<br>Furthermore, <em>pip</em> (released in 2008) supports uninstalling packages. <b>You should definetely use pip</b>.</p>
-<pre><code class="bash" data-trim contenteditable>
+						<pre><code class="bash" data-trim contenteditable>
 $ pip-3.7 search bio
 biotools                - A bunch of bioinformatics utilities.
 moa                     - Moa - command-line workflows (in bioinformatics)
 ...
-</code></pre>
+						</code></pre>
                     </section>
 
                     <section>
                         <h2>virtualenv</h2>
                         <p>A tool to create isolated Python environments</p>
                         <p>It elegantly solves the problem of installing two version of the same python extension in order to use them at the same time.</p>
-<pre><code class="bash" data-trim contenteditable>
+						<pre><code class="bash" data-trim contenteditable>
 $ virtualenv ENV
 Using base prefix '/opt/local/Library/Frameworks/Python.framework/Versions/3.7'
 New python executable in ./ENV/bin/python3.7
@@ -242,17 +241,454 @@ $ ls
 bin     include lib
 $ source bin/activate
 (ENV) $
-</code></pre>
+						</code></pre>
                     </section>
+
                     <section>
                         <h2>virtualenv (II)</h2>
-<p>Deactivate the virtualenv:</p>
-<pre><code class="python" data-trim contenteditable>
+						<p>Deactivate the virtualenv:</p>
+						<pre><code class="python" data-trim contenteditable>
 (ENV) $ deactivate
-</code></pre>
+						</code></pre>
                     </section>
-</section>
+                </section>
 
+                <!-- Syntax Section -->
+            	<section id="syntax">
+                    <section data-background="#4d7e65">
+					    <h2>3. Python syntax and native data-types</h2>
+                    </section>
+
+					<section>
+						<h2>Hello world</h2>
+						<pre><code class="python" data-trim contenteditable>
+$ python3
+>>> print('Hello world')
+Hello world
+						</code></pre>
+					</section>
+
+                    <section>
+                        <h2>Whitespaces</h2>
+                        <ul>
+                            <li>No hard tabs</li>
+                            <li>4 spaces per indentation level.</li>
+                            <li>Never mix them :(</li>
+                            <li>Read <a href="http://legacy.python.org/dev/peps/pep-0008/" target="_blank">PEP-8</a></li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Configuring Vim</h2>
+						<pre><code data-trim contenteditable>
+$ cat ~/.vimrc
+set tabstop=4
+set shiftwidth=4
+set expandtab
+syntax on
+set backspace=indent,eol,start
+						</code></pre>
+					</section>
+
+                    <section>
+                        <h2>More about style</h2>
+                        <ul>
+                            <li>joined_lower preferred over camelCase</li>
+                            <li>ClassName</li>
+                            <li>interface, _internal, __private (requires further explanation)</li>
+                            <li>CONSTANT_VARIABLE</li>
+                            <li>variable_collision_</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Explicit and implicit line joining</h2>
+                        <p>Explicit</p>
+                        <pre><code class="python" data-trim contenteditable>
+leap_year = year % 4 == 0 and year % 100 != 0 \
+    or year % 400 == 0
+                        </code></pre>
+                        <p>Implicit</p>
+                        <pre><code class="python" data-trim contenteditable>
+# These are the Dutch names for the months of the year
+month_names = ['Januari', 'Februari', 'Maart',
+               'April',   'Mei',      'Juni',
+               'Juli',    'Augustus', 'September',
+               'Oktober', 'November', 'December']
+                        </code></pre>
+                    </section>
+
+                    <section>
+                    	<h2>Numeric types</h2>
+                    	<pre><code class="python" data-trim contenteditable>
+import math
+
+int_var = 223344
+
+float_var = int_var / 2.0
+
+complex_var = 1.5 + 3j
+
+f = float(int_var)
+i = int(float_var)
+round(f)
+x = 2 ** 5
+
+math.floor(f)
+                    	</code></pre>
+                    </section>
+
+                    <section>
+                    	<h2>Sequence types</h2>
+                    	<pre><code class="python" data-trim contenteditable>
+string_literal = 'Python course'
+
+planets = ['Mercury', 'Venus', 'Earth', 'Mars',
+           'Jupiter', 'Saturn', 'Uranus', 'Neptune']
+
+prime_numbers = [2, 3, 5, 7]
+
+country_codes = {34: 'Spain', 376: 'Andorra', 
+                 41: 'Switzerland', 424: None}
+
+birth_year = ('Stephen Hawking', 1942)
+                    	</code></pre>
+                    </section>
+
+ 					<section>
+                    	<h2>String quotation</h2>
+                    	<pre><code class="python" data-trim contenteditable>             
+single = 'allows embedded "double" quotes'
+doubled = "allows embedded 'single' quotes".
+tripled = '''Three single quotes''', """Three double quotes"""
+						</code></pre>
+                    </section>
+
+                    <section>
+                    	<h2>Operations on sequence types</h2>
+                    	<pre><code class="python" data-trim contenteditable>
+>>> planets.append('Mercury')
+>>> print(planets)
+['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter',
+'Saturn', 'Uranus', 'Neptune', 'Pluto']
+>>> planets[-1]
+'Pluto'
+>>> planets[:4]
+['Mercury', 'Venus', 'Earth', 'Mars']
+>>> planets[0:4]
+['Mercury', 'Venus', 'Earth', 'Mars']
+>>> planets[-1] = 'Pluto is not a planet'
+                    	</code></pre>
+                    </section>
+
+					<section>
+                    	<h2>Operations on sequence types</h2>
+                    	<pre><code class="python" data-trim contenteditable>
+>>> planets
+['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn',
+'Uranus', 'Neptune', 'Pluto']
+>>> planets.remove('Pluto')
+>>> planets
+['Mercury', 'Venus', 'Earth', 'Mars',
+'Jupiter', 'Saturn', 'Uranus', 'Neptune']
+>>> del planets[5]
+>>> planets
+['Mercury', 'Venus', 'Earth', 'Mars',
+'Jupiter', 'Uranus', 'Neptune']
+>>> del planets[5:7]
+>>> planets
+['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter']
+                    	</code></pre>
+                    </section>
+
+					<section>
+                    	<h2>But tuples are immutable</h2>
+                    	<pre><code class="python" data-trim contenteditable>
+>>> birth_year = 'Stephen Hawking', 1942  # ',' constructor
+>>> birth_year
+('Stephen Hawking', 1942)
+>>> birth_year[1] = 1943     # Error!
+                    	</code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Useful idioms</h2>
+                        <pre><code class="python" data-trim contenteditable>
+# Swap values
+b, a = a, b
+
+# Unpacking
+atom, atom_number, resisdue, chain_id = ['CA', 1, 'ALA', 'A']
+
+zeroes = [0] * 100
+spaces = 100 * " "
+
+>>> for i in range(5):
+...     print(i, end=' ')
+0 1 2 3 4
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>List comprehension</h2>
+                        <pre><code class="python" data-trim contenteditable>
+# Non-idiomatic
+results = []
+for i in range(20):
+    if i % 2 == 0:
+        results.append(i)
+
+# Pythonista style
+results = [x for x in range(20) if x % 2 == 0]
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Iterating</h2>
+                        <p>Over a list</p>
+                        <pre><code class="python" data-trim contenteditable>
+monsters = ['Kraken', 'Leviathan', 'Uroborus', 'Hydra']
+
+# Method 1
+for monster in monsters:
+    print(monster)
+
+# Get the index in the array
+for i, monster in enumerate(monsters):
+    print (i, monster)
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Iterating</h2>
+                        <p>Over a dictionary</p>
+                        <pre><code class="python" data-trim contenteditable>
+country_codes = {34: 'Spain', 376: 'Andorra', 
+                 41: 'Switzerland', 424: None}
+
+# By key
+for country_code in country_codes:
+    print(country_code)
+
+# By value
+for country in country_codes.values():
+    print(country)
+
+# By both
+for country_code, country in country_codes.items():
+    print(country_code, country)
+
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>String concatenation</h2>
+                        <pre><code class="python" data-trim contenteditable>
+>>> my_list = ['k', 'o', 'n', 'n', 'i', 'c', 'h', 'i', 'w', 'a']
+
+# Method 1
+s = ''
+for c in my_list:
+    s += c
+
+# Method 2
+s = ''
+for c in my_list:
+    s = "%s%s" % (s, c)
+
+# Idiomatic
+''.join(my_list)
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Encore</h2>
+                        <pre><code class="python" data-trim contenteditable>
+>>> name = 'Captain'
+>>> surname = 'Haddock'
+
+>>> print(f"{name} {surname}")
+Captain Haddock
+
+>>> print("{} {}".format(name, surname))
+Captain Haddock
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>First example</h2>
+                        <pre><code class="python" data-trim contenteditable>
+import sys
+
+
+def say(message=''):
+    """Says something"""
+    print message
+
+
+if __name__ == "__main__":
+    say(sys.argv[1])
+
+                        </code></pre>
+                        <br>
+                        <p>To execute it (<a href="../code/examples/example_1.py" target="_blank">example_1.py</a>):</p>
+                        <pre><code class="bash" data-trim contenteditable>
+$ python3 example_1.py 'Hello World'
+Hello World
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Second example</h2>
+                        <p>(<a href="../code/examples/example_2.py" target="_blank">example_2.py</a>):</p>
+                        <pre><code class="python" data-trim contenteditable>
+import sys
+
+
+def usage():
+    print('usage: {} message'.format(sys.argv[0]))
+
+
+def say(message):
+    """Says something"""
+    print(message)
+
+
+if __name__ == "__main__":
+    if len(sys.argv[1:]) != 1:
+        usage()
+        raise SystemExit('Wrong command line')
+    say(sys.argv[1])
+
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Additional control words</h2>
+                        <ul>
+                            <li>if, elif, else</li>
+                            <li>break, continue</li>
+                            <li>pass</li>
+                            <li>swtch = if..elif..elif..else</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Functions</h2>
+                        <pre><code class="python" data-trim contenteditable>
+def attacked (monster, survivors=0):
+    print('A {} attacked our village!').format(monster))
+    if survivors:
+        print('Luckily, {} people survived'.format(survivors))
+
+>>> attacked('Kraken', 42)
+A Kraken attacked our village!
+Luckily, 42 people survived
+>>> attacked('Cthulhu')
+A Cthulhu attacked our village!
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Different ways of reading from files</h2>
+                        <pre><code class="python" data-trim contenteditable>
+# Method 1
+f = open('a_file.txt')
+for line in f:
+    print(line)
+f.close()
+
+# Method 2
+f = open('a_file.txt', 'r')
+lines = f.readlines()
+for line in f:
+    print(line)
+f.close()
+
+# Method 3
+with open('a_file.txt') as f:
+    for line in f:
+        print(line)
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Writing to files</h2>
+                        <pre><code class="python" data-trim contenteditable>
+import os
+
+# Method 1
+out = open('a_file.txt', 'w')
+for i in range(10):
+    out.write("{}{}".format(i, os.linesep))
+out.close()
+
+# Method 2
+with open('a_file.txt', 'w'):
+    for i in range(10):
+        out.write("{}{}".format(i, os.linesep))
+
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h3>In python, everything is an object</h3>
+                        <pre><code class="python" data-trim contenteditable>
+>>> eggs = 10
+>>> print(eggs.__add__)
+&lt;method-wrapper '__add__' of int object at 0x184d080&gt;
+>>> print(dir(eggs))
+['__abs__', '__add__', '__and__', '__class__', '__cmp__', '__coerce__', '__delattr__', '__div__', '__divmod__', '__doc__', '__float__', '__floordiv__', '__format__', '__getattribute__', '__getnewargs__', '__hash__', '__hex__', '__index__', '__init__', '__int__', '__invert__', '__long__', '__lshift__', '__mod__', '__mul__', '__neg__', '__new__', '__nonzero__', '__oct__', '__or__', '__pos__', '__pow__', '__radd__', '__rand__', '__rdiv__', '__rdivmod__', '__reduce__', '__reduce_ex__', '__repr__', '__rfloordiv__', '__rlshift__', '__rmod__', '__rmul__', '__ror__', '__rpow__', '__rrshift__', '__rshift__', '__rsub__', '__rtruediv__', '__rxor__', '__setattr__', '__sizeof__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__trunc__', '__xor__', 'bit_length', 'conjugate', 'denominator', 'imag', 'numerator', 'real']
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Common mistake</h2>
+                        <p>Mutable and immutable objects</p>
+                        <pre><code class="python" data-trim contenteditable>
+def f(a, L=[]):
+    L.append(a)
+    return L
+
+>>> f(1)
+[1]
+>>> f(2)
+[1, 2]
+                        </code></pre>
+                    </section>
+
+                     <section>
+                        <h2>Common mistake</h2>
+                        <p>Mutable and immutable objects</p>
+                        <pre><code class="python" data-trim contenteditable>
+def f(a, L=None):
+    if L is None:
+        L = []
+    L.append(a)
+    return L
+
+>>> f(1)
+[1]
+>>> f(2)
+[2]
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Common mistake</h2>
+                        <p>Mutable and immutable objects</p>
+                        <p>
+                    "Python’s default arguments are evaluated once when the function is defined, not each time the function is called. This means that if you use a mutable default argument and mutate it, you will and have mutated that object for all future calls to the function as well."
+                		</p>
+            		</section>
+				</section>
+
+				<!-- Parsing Atom Data Section -->
+               	<section id="parsing">
+					<section data-background="#1D4972">
+						<h2 style="color:white;">4. Parsing Atom Data</h2>
+					</section>
+				</section>
 			</div>
 		</div>
 
