@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>CSB Python Course - Day 2</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				
+				<section>
+					<h1>Python Course</h1>
+					<h3>Computational Structural Biology Group<br><a href="http://www.bonvinlab.org/">BonvinLab</a></h3>
+					<p>
+						<small><a href="https://github.com/brianjimenez" target="_blank">Brian Jimenez</a></small>
+					</p>
+				</section>
+				
+				<section>
+					<h2>Day 2</h2>
+                    <ol>
+                        <li><a href="#/oop">OOP</a></li>
+                        <li><a href="#/refactoring">Refactoring Kata 1</a></li>
+                    </ol>
+                </section>
+
+                <!-- OOP Section -->
+                <section id="oop">
+					<section data-background="#68A0D7">
+						<h2 style="color:white;">1. Object-oriented Programming</h2>
+					</section>
+
+					<section>
+                        <h2>Object oriented programming</h2>
+                        <br>
+                        <h4>Paradigm where objects have data fields and associated procedures (methods).</h4>
+                        <p>An object is an abstract data type with the addition of <em>polymorphism</em> and <em>inheritance</em>.</p>
+                    </section>
+
+                    <section>
+                        <h2>Object oriented programming (II)</h2>
+                        <p>The goal is to design modular and reusable software.</p>
+                        <p>- Encapsulation and information hiding:</p>
+                        <p>Avoid <a href="http://en.wikipedia.org/wiki/Spaghetti_code" target"_blank">Spaghetti code</a>.</p>
+                    </section>
+
+                    <section>
+                        <h2>Object &amp; Class</h2>
+                        <p>A class is a binding of methods and variables in a single unit.</p>
+                        <p><b>An object is an instance of a class.</b></p>
+                        <br>
+                        <p>A class is a template which defines the methods (behavior) and variables (state) to be included in a particular object.</p>
+                    </section>
+
+                    <section>
+                        <h2>Object &amp; Class (II)</h2>
+                        <p>If a class is an instance of a class too, then this class is called metaclass.</p>
+                    </section>
+
+                    <section>
+                        <h2>Object &amp; Class, examples</h2>
+                        <ul>
+                            <li>Complex is a class, Ubiquitin is an object.</li>
+                            <li>ResearchCenter is a class, Bijvoet Center is an object.</li>
+                            <li>Monster is a class, Leviathan is an object.</li>
+                            <li>Animal is a metaclass, a cat is a class and my cat is an object.</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Simple class in Python</h2>
+                        <pre><code class="python" data-trim contenteditable>
+class Monster():
+    """Represents a mythological creature"""
+    pass
+
+
+>>> kraken = Monster()
+>>> type(kraken)
+&lt;class '__main__.Monster'&gt;
+>>> isinstance(kraken, Monster)
+True
+>>> leviathan = Monster()
+>>> type(leviathan) == type(kraken)
+True
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Constructor</h2>
+                        <pre><code class="python" data-trim contenteditable>
+class Monster():
+    """Represents a mythological creature"""
+    def __init__(self, origin):
+        self.origin = origin
+
+
+>>> kraken = Monster('Scandinavia')
+>>> kraken.origin
+'Scandinavia'
+>>> kraken.roar()
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+AttributeError: 'Monster' object has no attribute 'roar'
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Class attributes and methods</h2>
+                        <pre><code class="python" data-trim contenteditable>
+class Monster():
+    latin_name = 'monstrum'
+
+    def __init__(self, origin):
+        self.origin = origin
+
+    @classmethod
+    def get_latin(cls):
+        return cls.latin_name
+
+>>> kraken = Monster('Scandinavia')
+>>> print(Monster.get_latin())
+monstrum
+>>> kraken.get_latin()
+monstrum
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Static methods</h2>
+                        <pre><code class="python" data-trim contenteditable>
+class Monster():
+    def __init__(self, origin):
+        self.origin = origin
+
+    @staticmethod
+    def battle(monster1, monster2):
+        print('A monster from {0} is fighting a \
+second monster from {1}'.format(monster1.origin, monster2.origin))
+
+>>> kraken = Monster('Scandinavia')
+>>> leviathan = Monster('Ancient Middle East')
+>>> Monster.battle(kraken, leviathan)
+A monster from Scandinavia is fighting a second monster from
+Ancient Middle East
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Public, private, protected</h2>
+                        <p>"We're all consenting adults"</p>
+                        <pre><code class="python" data-trim contenteditable>
+class Example():
+
+    open_to_change = 1
+    _this_could_change = 2
+    __implementation_detail = 3
+
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Inheritance</h2>
+                        <pre><code class="python" data-trim contenteditable>
+class Dinosaur():
+    def __init__(self, name, era='Cretaceous'):
+        self.name = name
+        self.era = era
+
+    def eat(self):
+        raise NotImplementedError
+
+
+class TyrannosaurusRex(Dinosaur):
+    def __init__(self):
+        super().__init__('Tyrannosaurus Rex')
+
+    def eat(self):
+        print('I am carnivore')
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Challenge 1: The Watermaker</h2>
+                            <p>Write a program to create water</p>
+                            <ul>
+                                <li>There are two types of possible atoms: Oxygen and Hydrogen.</li>
+                                <li>Water = H<sub>2</sub>O</li>
+                                <li>Read the number of atoms of each kind from input</li>
+                                <li>And calculate the number of water molecules and the remainders of the other atoms.</li>
+                            </ul>
+                            <p><a href="../code/challenges/watermaker.ipynb" target="_blank">#</a>
+                    </section>
+
+                    <section>
+                        <h2>Challenge 3</h2>
+                        <p>
+                        	We're just back from the famous Jurassic Park. Nevertheless, there were only two kinds of dinosaurs: Tyrannosaurus Rex and Triceratops.
+                        	<br>
+                        	We really enjoyed when they fight against each other...
+                        </p>
+                    </section>
+
+                    <section>
+                    	<p>Write a program to simulate those battles:</p>
+                        <ul>
+                            <li>As dinosaurs, both T-rex and Triceratops roar and they fight naturally against each other.</p>
+                            <li>T-rex size varies from 5 to 15 meters.</li>
+                            <li>Triceratops size ranges between 7 and 10 meters.</li>
+                            <li>If the number of T-rex is more than the double of Triceratops, they kill all the herd of Triceratops.</li>
+                            <li>If the sum of Triceratop herd is bigger than Tyrannosaurus, they kill one of the Tyrannosaurus.</li>
+                            <li>Otherwise, the battle finishes OK.</li>
+                        </ul>
+                        <p><a href="../code/challenges/jurassic_park.ipynb" target="_blank">#</a>
+                    </section>
+
+                    <section>
+                        <h2>Exceptions</h2>
+                        <p>Exceptions are errors detected during execution.</p>
+                        <p>Exceptions can be handled:</p>
+                        <pre><code class="python" data-trim contenteditable>
+while True:
+    try:
+        x = int(input("Please enter a number: "))
+        break
+    except ValueError:
+        print("Oops!  That was no valid number.  Try again...")
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <p>"Easier to ask forgiveness than permission"</p>
+                        <pre><code class="python" data-trim contenteditable>
+# Non-idiomatic
+i = input()
+if type(i) == type(1):
+    #do wathever
+else:
+    print('Error')
+
+# Pythonic
+try:
+    i = int(input())
+except ValueError:
+    print('Error')
+                        </code></pre>
+</section>
+
+
+                </section>
+
+				<!-- Refactoring Section -->
+               	<section id="refactoring">
+					<section data-background="#1D4972">
+						<h2 style="color:white;">2. Refactoring Kata 1</h2>
+					</section>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                slideNumber: true, 
+                slideNumber: 'c/t',
+                showSlideNumber: 'all',
+                transition: 'slide',
+
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
