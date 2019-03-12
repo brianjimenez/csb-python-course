@@ -1,0 +1,162 @@
+<ddoctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>CSB Python Course - Day 3</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				
+				<section>
+					<h1>Python Course</h1>
+					<h3>Computational Structural Biology Group<br><a href="http://www.bonvinlab.org/">BonvinLab</a></h3>
+					<p>
+						<small><a href="https://github.com/brianjimenez" target="_blank">Brian Jimenez</a></small>
+					</p>
+				</section>
+				
+				<section>
+					<h2>Day 3</h2>
+                    <ol>
+                        <li><a href="#/numpy">NumPy</a></li>
+                        <li><a href="#/matplotlib">Matplotlib</a></li>
+                    </ol>
+                </section>
+
+                <!-- OOP Section -->
+                <section id="numpy">
+					<section data-background="#68A0D7">
+						<h2 style="color:white;">1. NumPy</h2>
+					</section>
+
+					<section>
+                        <h2>What is NumPy?</h2>
+                        <p>
+                            "NumPy is a library for the Python programming language, adding support for large, multi-dimensional arrays and matrices, along with a large collection of high-level mathematical functions to operate on these arrays." - <a href="https://en.wikipedia.org/wiki/NumPy">Wikipedia</a>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>Arrays</h2>
+                        <p>
+                            Arrays are the simplest object in NumPy (a multidimensional list) from the same data type.
+                        </p> 
+                        <pre><code class="python" data-trim contenteditable>
+import numpy as np
+
+p = np.array([1, 2, 3, 4, 5])
+q = np.array([1, 2, 3, 4, 5], dtype=np.float)
+>>> p
+array([1, 2, 3, 4, 5])
+>>> q
+array([1., 2., 3., 4., 5.])
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Arrays</h2>
+                        <p>
+                            In NumPy, array dimensions are called <b>axis</b> and the total number of axes, <b>rank</b>.
+                        </p>
+                        <p>
+                            <em>array</em> is an alias of the <em>numpy.ndarray</em> object.
+                            <br>
+                        </p>
+                        <p>
+                            <ul>
+                                <li>ndarray.ndim: #axis of the array object (matrix)</li>
+                                <li>ndarray.shape: Tuple of dimensions of the array</li>
+                                <li>ndarray.size: Total number of elements</li>
+                            </ul>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>Example:</h2>
+                        <pre><code class="python" data-trim contenteditable>
+p = np.array([1, 2, 3, 4, 5])
+>>> p
+array([1, 2, 3, 4, 5])
+>>> p.ndim
+1
+>>> p.shape
+(5,)
+>>> p.size
+5
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Matrices</h2>
+                        <pre><code class="python" data-trim contenteditable>
+import numpy as np
+
+>>> a = np.arange(3*2)
+>>> a
+array([0, 1, 2, 3, 4, 5])
+>>> a = a.reshape(3,2)
+>>> a
+array([[0, 1],
+       [2, 3],
+       [4, 5]])
+                        </code></pre>
+                        <p>Dimensions, shape and size?</p>
+                    </section>
+
+                </section>
+
+				<!-- Refactoring Section -->
+               	<section id="matplotlib">
+					<section data-background="#1D4972">
+						<h2 style="color:white;">2. Refactoring Kata 1</h2>
+					</section>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                slideNumber: true, 
+                slideNumber: 'c/t',
+                showSlideNumber: 'all',
+                transition: 'slide',
+
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
