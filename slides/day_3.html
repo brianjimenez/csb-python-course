@@ -121,6 +121,142 @@ array([[0, 1],
                         <p>Dimensions, shape and size?</p>
                     </section>
 
+                    <section>
+                        <h2>Creating new arrays</h2>
+                        <pre><code class="python" data-trim contenteditable>
+>>> z = np.zeros(10)
+>>> z
+array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+>>> a = np.arange(10, 20)
+>>> a
+array([10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
+>>> b = np.arange(10, 20, 2)
+>>> b
+array([10, 12, 14, 16, 18])
+>>> np.ones(10)
+                        </code></pre>
+                    </section>
+
+
+                    <section>
+                        <h2>Multidimensional arrays</h2>
+                        <pre><code class="python" data-trim contenteditable>
+>>> a = np.array([[1, 2, 3], [4, 5, 6]])
+>>> a
+array([[1, 2, 3],
+       [4, 5, 6]])
+>>> z = np.zeros(27)
+>>> z.reshape(3,3,3)
+array([[[0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.]],
+
+       [[0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.]],
+
+       [[0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.]]])
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Matrix operations</h2>
+                        <pre><code class="python" data-trim contenteditable>
+a = np.array([[1,0], [0,1]])
+b = np.array([[1,2], [3,4]])
+>>> a+b
+array([[2, 2],
+       [3, 5]])
+>>> a*b
+array([[1, 0],
+       [0, 4]])
+>>> a.dot(b)
+array([[1, 2],
+       [3, 4]])
+>>> a**2
+array([[1, 0],
+       [0, 1]])
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Slicing</h2>
+                        <pre><code class="python" data-trim contenteditable>
+a = np.arange(10)
+>>> a[2:5]
+array([2, 3, 4])
+>>> a[2:]
+array([2, 3, 4, 5, 6, 7, 8, 9])
+>>> a[:-8]
+array([0, 1])
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Slicing (II)</h2>
+                        <pre><code class="python" data-trim contenteditable>
+>>> a = np.arange(18).reshape(6,3)
+>>> a
+array([[ 0,  1,  2],
+       [ 3,  4,  5],
+       [ 6,  7,  8],
+       [ 9, 10, 11],
+       [12, 13, 14],
+       [15, 16, 17]])
+>>> a[:5]
+array([[ 0,  1,  2],
+       [ 3,  4,  5],
+       [ 6,  7,  8],
+       [ 9, 10, 11],
+       [12, 13, 14]])
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Operator "..."</h2>
+                        <pre><code class="python" data-trim contenteditable>
+>>> a = np.arange(18).reshape(6,3)
+array([[ 0,  1,  2],
+       [ 3,  4,  5],
+       [ 6,  7,  8],
+       [ 9, 10, 11],
+       [12, 13, 14],
+       [15, 16, 17]])
+>>> a[...] = 0  # Equivalent to a[::]=0
+>>> a
+array([[0, 0, 0],
+       [0, 0, 0],
+       [0, 0, 0],
+       [0, 0, 0],
+       [0, 0, 0],
+       [0, 0, 0]])
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Assigning values</h2>
+                        <pre><code class="python" data-trim contenteditable>
+>>> a = np.arange(18).reshape(6,3)
+>>> a
+array([[ 0,  1,  2],
+       [ 3,  4,  5],
+       [ 6,  7,  8],
+       [ 9, 10, 11],
+       [12, 13, 14],
+       [15, 16, 17]])
+>>> a[:,0:2] = 1
+>>> a
+array([[ 1,  1,  2],
+       [ 1,  1,  5],
+       [ 1,  1,  8],
+       [ 1,  1, 11],
+       [ 1,  1, 14],
+       [ 1,  1, 17]])
+                        </code></pre>
+                    </section>
+
                 </section>
 
 				<!-- Refactoring Section -->
