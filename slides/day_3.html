@@ -38,6 +38,7 @@
                     <ol>
                         <li><a href="#/numpy">NumPy</a></li>
                         <li><a href="#/matplotlib">Matplotlib</a></li>
+                        <li><a href="#/bokeh">Bokeh</a></li>
                     </ol>
                 </section>
 
@@ -257,14 +258,90 @@ array([[ 1,  1,  2],
                         </code></pre>
                     </section>
 
+                    <section>
+                        <h2>Exercises</h2>
+                        <p>
+                            <a href="../code/day_3/numpy_exercises.ipynb">NumPy Notebook</a>
+                        </p>
+                    </section>
+
                 </section>
 
-				<!-- Refactoring Section -->
+				<!-- Matplotlib Section -->
                	<section id="matplotlib">
 					<section data-background="#1D4972">
-						<h2 style="color:white;">2. Refactoring Kata 1</h2>
+						<h2 style="color:white;">2. Matplotlib</h2>
 					</section>
+
+                    <section>
+                        <h2>Library structure</h2>
+                        <p>
+                            Matplotlib code is divided in three different parts:
+                            <ul>
+                                <li><em>backend</em>: the system dependent part (file outputs, window manager, etc.)</li>
+                                <li>Maplotlib API: base code</li>
+                                <li><em>pyplot</em>: procedural interface similar to Matlab and OpenGL</li>
+                            </ul>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>pyplot</h2>
+                        <p>
+                            <em>pyplot</em> relies on global state and a flat namespace. 
+                        </p>
+                        <p>
+                            It is OK for small applications, but when complexity raises, OO code is preferred.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>Simple example</h2>
+                        <pre><code class="python" data-trim contenteditable>
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.arange(0, 10, 0.2)
+y = np.sin(x)
+fig = plt.figure()
+ax = fig.add_subplot(111)
+ax.plot(x, y)
+plt.show()
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>More examples</h2>
+                        <p>
+                            <a href="../code/day_3/matplotlib.ipynb">Matplotlib Notebook</a>
+                        </p>
+                    </section>
+
 				</section>
+
+                <!-- Bokeh Section -->
+                <section id="bokeh">
+                    <section data-background="#007f00">
+                        <h2 style="color:white;">3. Bokeh</h2>
+                    </section>
+
+                    <section>
+                        <h2>Spirit</h2>
+                        <p>
+                            Bokeh is an interactive visualization library that targets modern web browsers for presentation. It builds on top of other libraries such as matplotlib and pandas.
+                        </p>
+                        <br>
+                        <p>
+                            <a href="https://nestor.science.uu.nl/haddock2.4/">Haddock 2.4</a> interactive plots use this technology.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>Simple examples</h2>
+                        <p>
+                            <a href="../code/day_3/bokeh.ipynb">Bokeh Notebook</a>
+                        </p>
+                    </section>
 
 			</div>
 		</div>
