@@ -1,4 +1,6 @@
-# Python Course
+![Bonvin Lab](media/bonvinlab.jpg)
 
-## Computational Structural Biology Group - BonvinLab
+# Computational Structural Biology Group: Python Course
+
+
 
